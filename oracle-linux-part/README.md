@@ -8,7 +8,7 @@ wget https://download.oracle.com/otn_software/linux/instantclient/1916000/oracle
 sudo yum localinstall oracle-instantclient19.16-sqlplus-19.16.0.0.0-1.x86_64.rpm
 
 
-# Place the files export_data.sh, csv_export.sql and bank_data.csv at the home folder
+# Place the files export_data.sh, csv_export.sql and names.csv at the home folder
 
 
 # Install awscli on Oracle Linux
@@ -23,7 +23,7 @@ aws configure
 # Enter the AWS Key, Secret and Region and press enter
 
 
-# Run the shell script for exporting the csv from Oracle DB bank_data table
+# Run the shell script for exporting the csv from Oracle DB names table
 
 ./export_data.sh
 

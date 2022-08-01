@@ -1,7 +1,7 @@
 [
   {
     "ParameterKey": "pS3BucketName",
-    "ParameterValue": "unique-bucket-name-dummy-2021"
+    "ParameterValue": "s3-etl-pipeline-names"
   },
   {
     "ParameterKey": "pSourceFolder",
@@ -25,10 +25,10 @@
   },
   {
     "ParameterKey": "pEmailforNotification",
-    "ParameterValue": "valid-email@xyz.com"
+    "ParameterValue": "nagpal.prabhat.prabhat@gmail.com"
   },
   {
     "ParameterKey": "pDatasetSchema",
-    "ParameterValue": "{\"Date\":{\"type\": \"datetime\", \"format\": \"%m/%d/%Y\" },\"Description\":{\"type\": \"string\"},\"Deposits\":{\"type\": \"float\"},\"Withdrawls\":{\"type\": \"float\"},\"Balance\":{\"type\": \"float\"}}"
+    "ParameterValue": "{\"Date\":{\"type\": \"datetime\", \"format\": \"%m/%d/%Y\" },\"first_name\":{\"type\": \"string\"},\"last_name\":{\"type\": \"string\"}}"
   }
 ]
