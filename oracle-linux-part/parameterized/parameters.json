@@ -1,0 +1,12 @@
+{
+  "TableConfig": [
+    {
+      "Name": "bank_data",
+      "IntervalInMinutes": 10
+    },
+    {
+      "Name": "names",
+      "IntervalInMinutes": 5
+    }
+  ]
+}
