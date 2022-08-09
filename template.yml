@@ -74,7 +74,7 @@ Resources:
         job = Job(glueContext)
         job.init(args['JOB_NAME'], args)
         datasource0 = glueContext.create_dynamic_frame.from_catalog(database = "${GlueDB}", table_name = "${pStageFolder}", transformation_ctx = "datasource0")
-        applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("date", "string", "date", "string"), ("description", "string", "description", "string"), ("deposits", "double", "deposits", "double"), ("withdrawls", "double", "withdrawls", "double"), ("balance", "double", "balance", "double"), ("year", "long", "year", "int"), ("month", "long", "month", "int"), ("day", "long", "day", "int")], transformation_ctx = "applymapping1")
+        applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("date", "string", "date", "string"), ("description", "string", "description", "string"), ("deposits", "long", "deposits", "double"), ("withdrawls", "long", "withdrawls", "double"), ("balance", "long", "balance", "double"), ("year", "long", "year", "int"), ("month", "long", "month", "int"), ("day", "long", "day", "int")], transformation_ctx = "applymapping1")
         resolvechoice2 = ResolveChoice.apply(frame = applymapping1, choice = "make_struct", transformation_ctx = "resolvechoice2")
 
         dropnullfields3 = DropNullFields.apply(frame = resolvechoice2, transformation_ctx = "dropnullfields3")
@@ -100,7 +100,7 @@ Resources:
        CodeUri: lambda
        Role: !GetAtt LambdaRole.Arn
        Timeout: 360
-       Runtime: python3.6
+       Runtime: python3.7
    
   SNSTopic:
     Type: AWS::SNS::Topic
@@ -225,7 +225,7 @@ Resources:
           - Sid: "stepfunction"
             Effect: "Allow"
             Action: "states:*"
-            Resource: !Sub ${MyStepFunction}
+            Resource: !Sub ${BankDataStepFunction}
 
           - Sid: "s3listaccess"
             Effect: "Allow"
@@ -414,7 +414,7 @@ Resources:
       Timeout: 60
       Environment:
         Variables:
-          STEP_FUNC_ARN: !Ref MyStepFunction
+          STEP_FUNC_ARN: !Ref BankDataStepFunction
 
   StartCrawlerFunction:
     Type: AWS::Serverless::Function
@@ -476,7 +476,7 @@ Resources:
       Role: !GetAtt LambdaRole.Arn
       Handler: start_codebuild.lambda_handler
       CodeUri: lambda
-      Runtime: python3.6
+      Runtime: python3.7
       Timeout: 500
       Environment:
         Variables:
@@ -526,7 +526,7 @@ Resources:
                 Resource: 
                     - !Sub "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws-glue/*"
 
-  MyStepFunction:
+  BankDataStepFunction:
     Type: AWS::StepFunctions::StateMachine
     Properties:
       TracingConfiguration: 
